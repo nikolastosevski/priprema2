@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.w3schools.com" 
+           elementFormDefault="qualified" 
+           targetNamespace="http://www.w3schools.com" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Racun">
+    <xs:complexType>
+      <xs:sequence minOccurs="1" maxOccurs ="unbounded">
+        <xs:element ref="Porudzbina"/>
+      </xs:sequence>      
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Porudzbina">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Kupac"/>
+        <xs:element ref="Stavka" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Kupac">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PunoIme"/>
+        <xs:element ref="Telefon"/>
+        <xs:element ref="Email" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="PunoIme">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Ime"/>
+        <xs:element ref="SrednjeIme" minOccurs="0" maxOccurs="1"/>
+        <xs:element ref="Prezime" minOccurs="1" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Ime">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:minLength value="3"/>
+        <xs:maxLength value="30"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="SrednjeIme" type="xs:string"/>
+  <xs:element name="Prezime" type="xs:string"/>
+
+  <xs:element name="Telefon">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[0-9]{3}-[0-9]{4}-[0-9]{2,4}"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+
+  <xs:element name="Email">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="EmailRestrikcija">
+          <xs:attribute name="tip" use="required">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="sluzbeni" />
+                <xs:enumeration value="privatni" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="EmailRestrikcija">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\c{5,20}@\c{4,8}.com"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="Stavka">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Proizvod"/>
+        <xs:element ref="Cena"/>
+        <xs:element ref="Kolicina"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Proizvod">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="opis" use="optional" type="xs:string"/>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Cena">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="CenaTip">
+
+          <xs:attribute name="valuta" default="rsd">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="rsd" />
+                <xs:enumeration value="eur" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="CenaTip">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[0-9]{0,6},[0-9]{0,3}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="Kolicina">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:nonNegativeInteger">
+
+          <xs:attribute name="jedinica" default="broj">
+            <xs:simpleType>
+              <xs:restriction base="xs:NMTOKEN">
+                <xs:enumeration value="kg" />
+                <xs:enumeration value="g" />
+                <xs:enumeration value="mg" />
+                <xs:enumeration value="broj" />
+                <xs:enumeration value="l" />
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  
+</xs:schema>

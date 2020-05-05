@@ -1,1 +1,26 @@
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE Porudzbina SYSTEM "racun.dtd">
+<Porudzbina xmlns="http://www.w3schools.com"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.w3schools.com racun.xsd">
+    <Kupac>
+      <PunoIme>
+        <Ime>Nikola</Ime>
+        <SrednjeIme>Mome</SrednjeIme>
+        <Prezime>Stosevski</Prezime>
+      </PunoIme>
+      <Telefon>063-1801-971</Telefon>
+      <Email tip="sluzbeni">nikola@gamail.com</Email>
+      <Email tip="privatni">stosevski@hotmail.com</Email>
+    </Kupac>
+    <Stavka>
+      <Proizvod opis="Ajdared">Jabuke</Proizvod>
+      <Cena valuta="rsd">120,0</Cena>
+      <Kolicina jedinica="kg">5</Kolicina>
+    </Stavka>
+    <Stavka>
+      <Proizvod opis="Indijski">Ananas</Proizvod>
+      <Cena valuta="eur">1,4</Cena>
+      <Kolicina jedinica="broj">3</Kolicina>
+    </Stavka>
+  </Porudzbina>
